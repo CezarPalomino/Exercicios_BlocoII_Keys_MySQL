@@ -1,0 +1,43 @@
+create database db_generation_game_online;
+
+use db_generation_game_online;
+create table tb_classe(
+	id_classe int auto_increment,
+    nomeClasse varchar (255) not null,
+    forteContra varchar (255) not null,
+    fracoContra varchar (255) not null,
+    
+    primary key (id_classe)
+);
+
+insert into tb_classe(nomeClasse, forteContra, fracoContra) values ("Lutador", "Tanque", "Mago");
+insert into tb_classe(nomeClasse, forteContra, fracoContra) values ("Mago", "Lutador", "Atirador");
+insert into tb_classe(nomeClasse, forteContra, fracoContra) values ("Atirador", "Mago", "Assassino");
+insert into tb_classe(nomeClasse, forteContra, fracoContra) values ("Assassino", "Atirador", "Tanque");
+insert into tb_classe(nomeClasse, forteContra, fracoContra) values ("Tanque", "Assassino", "Lutador");
+
+use db_generation_game_online;
+create table tb_personagem(
+	id_personagem int auto_increment,
+    nomePersonagem varchar(255) not null,
+    id_classe int not null,
+    ataque int(4) not null,
+    defesa int(4) not null,
+    
+    primary key(id_personagem),
+    foreign key(id_personagem) references tb_classe(id_classe)
+);
+
+insert into tb_personagem(nomePersonagem, id_classe, ataque, defesa) values ("Garen", 1, "200", "250");
+insert into tb_personagem(nomePersonagem, id_classe, ataque, defesa) values ("Veigar", 2, "750", "150");
+insert into tb_personagem(nomePersonagem, id_classe, ataque, defesa) values ("Draven", 3, "400", "175");
+insert into tb_personagem(nomePersonagem, id_classe, ataque, defesa) values ("Leona", 5, "150", "450");
+insert into tb_personagem(nomePersonagem, id_classe, ataque, defesa) values ("Zed", 4, "400", "180");
+
+select * from tb_personagem where ataque > 200;
+
+select * from tb_personagem where defesa between 180 and 280;
+
+select * from tb_personagem where id_classe like "%3%"; -- atirador
+
+select * from tb_personagem inner join tb_classe on tb_personagem.id_classe = tb_classe.id_classe;

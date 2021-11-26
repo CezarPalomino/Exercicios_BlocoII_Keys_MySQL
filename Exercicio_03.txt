@@ -1,0 +1,45 @@
+create database db_farmacia_do_bem;
+
+use db_farmacia_do_bem;
+
+create table tb_categoria(
+    id_categoria int auto_increment  primary key,
+    categoria varchar(255),
+    tipo varchar(255),
+    precisaReceita boolean
+);
+
+create table tb_produto(
+    id_produto int not null auto_increment primary key,
+    nome varchar(255),
+    valor decimal(5,2),
+    validade varchar(255),
+    lote varchar(255),
+    id_categoria int not null,
+    foreign key(id_categoria) references tb_categoria(id_categoria)
+    );
+    
+    insert into tb_categoria(categoria, tipo, precisaReceita) values ("Caixa", "Pílula", false);
+    insert into tb_categoria(categoria, tipo, precisaReceita) values ("Frasco", "Líquido", false);
+    insert into tb_categoria(categoria, tipo, precisaReceita) values ("Caixa", "Pomada", false);
+    insert into tb_categoria(categoria, tipo, precisaReceita) values ("Caixa", "Pílula", true);
+    insert into tb_categoria(categoria, tipo, precisaReceita) values ("pacote", " ", false);
+    
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Dorflex", 7.00, "29/05/2029", "02/01/2021", 1);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Valerato de Betametazona", 30.00, "20/9/2021", "30/05/2029", 3);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Advil", 2.00, "20/9/2021", "30/05/2029", 1);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Rivotril", 50.00, "20/9/2021", "30/05/2029", 4);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("TarjaBlack", 60.00, "20/9/2021", "30/05/2029", 4);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Preservativo Masculino", 5.00, "20/9/2021", "30/05/2029", 5);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Preservativo Feminino", 5.00, "20/9/2021", "30/05/2029", 5);
+    insert into tb_produto(nome, valor, validade, lote, id_categoria) values ("Pomada Genérica", 25.00, "20/9/2021", "30/05/2029", 3);
+     
+	select * from tb_produto;
+    
+    select * from tb_produto where valor between 20.00 and 60.00;
+    
+    select * from tb_produto where nome like "%p%";
+    
+    select * from tb_produto inner join tb_categoria on tb_produto.id_produto = tb_categoria.id_categoria;
+    
+    select * from tb_produto where id_categoria = 3;

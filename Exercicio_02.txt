@@ -1,0 +1,45 @@
+create database db_pizzaria_legal;
+
+use db_pizzaria_legal;
+
+create table tb_categoria(
+    id_categoria int auto_increment  primary key,
+    categoria varchar(255),
+    tamanho varchar(255),
+    borda varchar(255)
+);
+
+create table tb_pizza(
+    id_pizza int not null auto_increment primary key,
+    sabor varchar(255),
+    valor decimal(5,2),
+    vegetariana boolean,
+    refrigerante varchar(255),
+    id_categoria int not null,
+    foreign key(id_categoria) references tb_categoria(id_categoria)
+    );
+    
+    insert into tb_categoria(categoria, tamanho, borda) values ("Salgada", "Grande", "Catupiry");
+    insert into tb_categoria(categoria, tamanho, borda) values ("Doce", "Mini", "Sem Recheio");
+    insert into tb_categoria(categoria, tamanho, borda) values ("Salgada", "Média", "Sem Recheio");
+    insert into tb_categoria(categoria, tamanho, borda) values ("Doce", "Grande", "Chocolate");
+    insert into tb_categoria(categoria, tamanho, borda) values ("Salgada", "Mini", "Sem Recheio");
+    
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Calabresa", 65.00, false, "Dolly", );
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Chocolate", 65.00, true, "Coca-Cola", 4);
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Queijo", 65.00, true, "Pepsi", 1);
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Chocolate", 8.00, true, "Coca-Cola", 2);
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Peperone", 25.00, false, "Pepsi", 3);
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Calabresa", 8.00, false, "Coca-Cola", 5);
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Queijo", 8.00, true, "Coca-Cola", 2);
+    insert into tb_pizza(sabor, valor, vegetariana, refrigerante, id_categoria) values ("Frango", 25.00, false, "Pepsi", 3);
+     
+	select * from tb_pizza;
+    
+    select * from tb_pizza where valor between 20.00 and 60.00;
+    
+    select * from tb_pizza where sabor like "%c%";
+    
+    select * from tb_pizza inner join tb_categoria on tb_pizza.id_pizza = tb_categoria.id;
+    
+    select * from tb_pizza where id_categoria = 2;

@@ -1,0 +1,43 @@
+create database db_cidade_das_frutas;
+
+use db_cidade_das_frutas;
+create table tb_categoria(
+    id_categoria int auto_increment,
+    saco boolean not null,
+    caixa boolean not null,
+    cor varchar (255) not null,
+  
+    primary key (id_classe)
+);
+
+insert into tb_categoria(saco, caixa, cor) values (false, true, "Amarela");
+insert into tb_categoria(saco, caixa, cor) values (true, true, "Vermelha");
+insert into tb_categoria(saco, caixa, cor) values (true, true, "Amarela");
+insert into tb_categoria(saco, caixa, cor) values (true, true, "Alaranjada");
+insert into tb_categoria(saco, caixa, cor) values (false, true, "Roxa");
+
+use db_cidade_das_frutas;
+create table tb_produto(
+    id_produto int auto_increment,
+    nome varchar(255) not null,
+    valorKg decimal(4,2) not null,
+    fk_id_categoria int not null,
+    
+    primary key(id_produto),
+    foreign key(fk_id_categoria) references tb_categoria(id_categoria)
+);
+
+insert into tb_produto(nome, valorKg, fk_id_categoria) values ("Banana", 2.00, 3);
+insert into tb_produto(nome, valorKg, fk_id_categoria) values ("Uva", 5.00, 5);
+insert into tb_produto(nome, valorKg, fk_id_categoria) values ("Melão", 5.00, 1);
+insert into tb_produto(nome, valorKg, fk_id_categoria) values ("Limão Siciliano", 2.00, 3);
+insert into tb_produto(nome, valorKg, fk_id_categoria) values ("Maçã", 2.00, 2);
+insert into tb_produto(nome, valorKg, fk_id_categoria) values ("Laranja", 4.00, 2);
+
+select * from tb_produto where valorKg > 2.50;
+
+select * from tb_produto where valorKg between 3.00 and 5.00;
+
+select * from tb_produto where fk_id_categoria like "%5%"; 
+
+select * from tb_produto inner join tb_categoria on tb_produto.fk_id_categoria = tb_categoria.id_categoria;

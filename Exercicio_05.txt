@@ -1,0 +1,45 @@
+create database db_construindo_nossa_vida;
+
+use db_construindo_nossa_vida;
+
+create table tb_categoria(
+    id_categoria int auto_increment,
+    fragil boolean not null,
+    tipo varchar(255) not null,
+    tamanho varchar (255) not null,
+  
+    primary key (id_categoria)
+);
+
+insert into tb_categoria(fragil, tipo, tamanho) values (false, "Ferramenta", "Médio");
+insert into tb_categoria(fragil, tipo, tamanho) values (true, "Vidro", "Grande");
+insert into tb_categoria(fragil, tipo, tamanho) values (false, "Pintura", "Médio");
+insert into tb_categoria(fragil, tipo, tamanho) values (false, "Ferramenta", "Pequeno");
+insert into tb_categoria(fragil, tipo, tamanho) values (true, "Iluminação", "Médio");
+
+use db_construindo_nossa_vida;
+
+create table tb_produto(
+    id_produto int auto_increment,
+    nome varchar(255) not null,
+    valor decimal(7,2) not null,
+    fk_id_categoria int not null,
+    
+    primary key(id_produto),
+    foreign key(fk_id_categoria) references tb_categoria(id_categoria)
+);
+
+insert into tb_produto(nome, valor, fk_id_categoria) values ("Lustre", 2000.00, 5);
+insert into tb_produto(nome, valor, fk_id_categoria) values ("Tinta Verde Fosco", 45.00, 3);
+insert into tb_produto(nome, valor, fk_id_categoria) values ("Chave de Mandril", 3.00, 4);
+insert into tb_produto(nome, valor, fk_id_categoria) values ("Espelho", 75.00, 2);
+insert into tb_produto(nome, valor, fk_id_categoria) values ("Chave Inglesa Grande", 48.00, 1);
+insert into tb_produto(nome, valor, fk_id_categoria) values ("Verniz Transparente", 25.00, 3);
+
+select * from tb_produto where valor > 50.00;
+
+select * from tb_produto where valor between 6.00 and 60.00;
+
+select * from tb_produto where fk_id_categoria like "%3%"; 
+
+select * from tb_produto inner join tb_categoria on tb_produto.fk_id_categoria = tb_categoria.id_categoria;
